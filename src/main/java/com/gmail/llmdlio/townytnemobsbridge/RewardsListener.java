@@ -1,17 +1,16 @@
 package com.gmail.llmdlio.townytnemobsbridge;
 
-import java.math.BigDecimal;
-
+import com.palmergames.bukkit.towny.TownyAPI;
+import com.palmergames.bukkit.towny.exceptions.NotRegisteredException;
+import com.palmergames.bukkit.towny.object.Town;
+import net.tnemc.core.event.module.impl.AsyncMobRewardEvent;
 import org.bukkit.Location;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 
-import com.palmergames.bukkit.towny.TownyAPI;
-import com.palmergames.bukkit.towny.exceptions.NotRegisteredException;
-import com.palmergames.bukkit.towny.object.Town;
+import java.math.BigDecimal;
 
-import net.tnemc.mobs.AsyncMobRewardEvent;
 
 public class RewardsListener implements Listener {
 
