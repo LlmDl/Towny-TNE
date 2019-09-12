@@ -66,7 +66,7 @@ public class TownyTNEMobsControl extends JavaPlugin {
         if (TNE.loader().hasModuleEvent("AsyncMobRewardEvent"))
             return true;
         else {
-            getLogger().severe("Couldn't find TNE's Mobs module version 0.1.2.0 or greater");
+            getLogger().severe("TNE Version insufficient, go download TNE 0.1.1.8M4");
             return false;
         }
     }

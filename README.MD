@@ -1,4 +1,4 @@
-# Towny-TNEMobs Control by LlmDl
+0.1.1.8M4# Towny-TNEMobs Control by LlmDl
 
 ## Overview
 Towny-TNEMobs Control is a plugin made to bridge Towny and TNE's Mobs module.
@@ -30,7 +30,7 @@ Read the below requirements to make sure you're using the required versions of T
 Your server must be using the following versions or newer:
 
 * Towny 0.94.0.2+
-* TNE 1.1.8.25+
+* TNE 0.1.1.8M4+
 * TNE's Mobs module 0.1.3.0+ 
 
 ## Commands
