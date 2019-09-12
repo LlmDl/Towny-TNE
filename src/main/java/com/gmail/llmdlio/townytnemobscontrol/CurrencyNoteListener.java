@@ -36,7 +36,8 @@ public class CurrencyNoteListener implements Listener{
                 event.getPlayer().sendMessage("You cannot deposit your currency note outside of a town's Bank plot.");
                 event.setCancelled(true);
                 return;
-            }
+            } else
+                return;
         }
     }
 }

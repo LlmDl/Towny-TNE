@@ -5,7 +5,7 @@ api-version: ${project.bukkitAPIVersion}
 author: LlmDl
 depend: [Towny,TheNewEconomy]
 description: Bridge plugin to make Towny locations affect TNEMob payouts
-prefix: TownyTNEMobsControl
+prefix: TownyMobsCtrl
 commands:
   townymobs:
     description: shows version and commandlist

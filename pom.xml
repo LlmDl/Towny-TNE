@@ -2,7 +2,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.gmail.llmdlio</groupId>
   <artifactId>Towny-TNEMobs-Control</artifactId>
-  <version>0.0.1</version>
+  <version>1.0</version>
   <name>Towny-TNEMobs-Control</name>
   <description>A plugin that provides Towny-enabled manipulation of TNEMobs' drops.</description>
     <properties>
