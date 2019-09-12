@@ -1,4 +1,4 @@
-package com.gmail.llmdlio.townytnemobsbridge.config;
+package com.gmail.llmdlio.townytnemobscontrol.config;
 
 import java.io.File; 
 import java.io.FileWriter; 

@@ -1,11 +1,11 @@
-name: TownyTNEMobsBridge
-main: com.gmail.llmdlio.townytnemobsbridge.TownyTNEMobsBridge
+name: TownyTNEMobsControl
+main: com.gmail.llmdlio.townytnemobscontrol.TownyTNEMobsControl
 version: ${project.version}
 api-version: ${project.bukkitAPIVersion}
 author: LlmDl
 depend: [Towny,TheNewEconomy]
 description: Bridge plugin to make Towny locations affect TNEMob payouts
-prefix: TownyTNEMobsBridge
+prefix: TownyTNEMobsControl
 commands:
   townymobs:
     description: shows version and commandlist
@@ -14,7 +14,7 @@ commands:
     description: reloads the config.yml
     usage: /<command>
     permission: townymobs.reload
-    permission-message: "[TownyTNEMobsBridge] PermissionDenied."
+    permission-message: "[TownyTNEMobsControl] PermissionDenied."
 
 permissions:
   townymobs.reload:

@@ -1,9 +1,9 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.gmail.llmdlio</groupId>
-  <artifactId>Towny-TNEMobs-Bridge</artifactId>
+  <artifactId>Towny-TNEMobs-Control</artifactId>
   <version>0.0.1</version>
-  <name>Towny-TNEMobs-Bridge</name>
+  <name>Towny-TNEMobs-Control</name>
   <description>A plugin that provides Towny-enabled manipulation of TNEMobs' drops.</description>
     <properties>
         <java.version>1.8</java.version>
@@ -63,7 +63,7 @@
      <dependency>
         <groupId>net.tnemc</groupId>
         <artifactId>TNE</artifactId>
-        <version>1.1.8.24</version>
+        <version>1.1.8.25</version>
         <scope>provided</scope>
      </dependency>
   </dependencies>
