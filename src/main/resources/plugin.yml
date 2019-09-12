@@ -1,0 +1,22 @@
+name: TownyTNEMobsBridge
+main: com.gmail.llmdlio.townytnemobsbridge.TownyTNEMobsBridge
+version: ${project.version}
+api-version: ${project.bukkitAPIVersion}
+author: LlmDl
+depend: [Towny,TheNewEconomy]
+description: Bridge plugin to make Towny locations affect TNEMob payouts
+prefix: TownyTNEMobsBridge
+commands:
+  townymobs:
+    description: shows version and commandlist
+    usage: /<command>
+  townymobs reload:
+    description: reloads the config.yml
+    usage: /<command>
+    permission: townymobs.reload
+    permission-message: "[TownyTNEMobsBridge] PermissionDenied."
+
+permissions:
+  townymobs.reload:
+    description: Allow the player to reload the config.
+    default: op
