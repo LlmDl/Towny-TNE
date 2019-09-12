@@ -1,4 +1,4 @@
-0.1.1.8M4# Towny-TNEMobs Control by LlmDl
+# Towny-TNEMobs Control by LlmDl
 
 ## Overview
 Towny-TNEMobs Control is a plugin made to bridge Towny and TNE's Mobs module.
