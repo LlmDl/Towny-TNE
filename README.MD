@@ -26,6 +26,11 @@ After saving the config use /towny-tne reload to reload the config.
 
 Read the below requirements to make sure you're using the required versions of Towny, TNE, and TNE's Mobs module.
 
+## Upgrading
+Towny-TNE uses the commentedconfiguration developed by dumptruckman, so you won't have to worry about your config when updating Towny-TNE.
+
+New config values will be added with default settings and your old settings will be left intact.
+
 ## Requirements
 Your server must be using the following versions or newer:
 
@@ -42,4 +47,4 @@ Your server must be using the following versions or newer:
 * townytne.reload - allows use of ```/towny-tne reload```, defaults to ops.
 
 ## Credits
-Obviously me, LlmDl, lead developer of Towny Advanced. As well as creatorfromhell, author of TheNewEconomy, who helped this make this plugin possible with the addition of key events to Mobs and TNE.
+Obviously me, LlmDl, lead developer of Towny Advanced. As well as creatorfromhell, author of TheNewEconomy, who helped this make this plugin possible with the addition of key events to Mobs and TNE. Also worth mentioning is dumptruckman, who is responsible for the code used to make the config.  
