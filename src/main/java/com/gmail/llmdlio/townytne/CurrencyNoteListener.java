@@ -1,4 +1,4 @@
-package com.gmail.llmdlio.townytnemobscontrol;
+package com.gmail.llmdlio.townytne;
 
 import org.bukkit.Location;
 import org.bukkit.event.EventHandler;
@@ -14,16 +14,16 @@ import net.tnemc.core.event.currency.TNECurrencyNoteClaimedEvent;
 public class CurrencyNoteListener implements Listener{
 
     @SuppressWarnings("unused")
-    private TownyTNEMobsControl plugin;
+    private TownyTNE plugin;
     
-    public CurrencyNoteListener(TownyTNEMobsControl instance) {
+    public CurrencyNoteListener(TownyTNE instance) {
         this.plugin = instance;
     }
 
     @EventHandler (priority = EventPriority.NORMAL)
     public void cashedNoteEvent (TNECurrencyNoteClaimedEvent event) {
         Location loc = event.getPlayer().getLocation();
-        if (TownyTNEMobsControl.disabledWorlds.contains(loc.getWorld().getName()))
+        if (TownyTNE.disabledWorlds.contains(loc.getWorld().getName()))
             return;
 
         if (TownyAPI.getInstance().isWilderness(loc)) {

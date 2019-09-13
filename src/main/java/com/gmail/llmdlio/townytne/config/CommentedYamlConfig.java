@@ -1,4 +1,4 @@
-package com.gmail.llmdlio.townytnemobscontrol.config;
+package com.gmail.llmdlio.townytne.config;
 
 import java.io.File; 
 import java.io.FileWriter; 

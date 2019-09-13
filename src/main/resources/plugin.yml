@@ -1,22 +1,28 @@
-name: TownyTNEMobsControl
-main: com.gmail.llmdlio.townytnemobscontrol.TownyTNEMobsControl
+name: Towny-TNE
+main: com.gmail.llmdlio.townytne.TownyTNE
 version: ${project.version}
 api-version: ${project.bukkitAPIVersion}
 author: LlmDl
 depend: [Towny,TheNewEconomy]
 description: Bridge plugin to make Towny locations affect TNEMob payouts
-prefix: TownyMobsCtrl
+prefix: Towny-TNE
 commands:
-  townymobs:
+  towny-tne:
     description: shows version and commandlist
     usage: /<command>
-  townymobs reload:
+    permission: townytne.version
+    permission-message: "[Towny-TNE] PermissionDenied."
+  towny-tne reload:
     description: reloads the config.yml
     usage: /<command>
-    permission: townymobs.reload
-    permission-message: "[TownyTNEMobsControl] PermissionDenied."
+    permission: townytne.reload
+    permission-message: "[Towny-TNE] PermissionDenied."
 
 permissions:
-  townymobs.reload:
+  townytne.reload:
     description: Allow the player to reload the config.
     default: op
+  townytne.version:
+    description: Allow player to use & see /towny-tne.
+    default: op
+    

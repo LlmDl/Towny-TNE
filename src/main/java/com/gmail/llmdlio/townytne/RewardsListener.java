@@ -1,4 +1,4 @@
-package com.gmail.llmdlio.townytnemobscontrol;
+package com.gmail.llmdlio.townytne;
 
 import java.math.BigDecimal;
 
@@ -17,27 +17,27 @@ import net.tnemc.core.event.module.impl.AsyncMobRewardEvent;
 public class RewardsListener implements Listener {
 
     @SuppressWarnings("unused")
-    private TownyTNEMobsControl plugin;
+    private TownyTNE plugin;
 
-    public RewardsListener(TownyTNEMobsControl instance) {
+    public RewardsListener(TownyTNE instance) {
         this.plugin = instance;
     }
 
     @EventHandler (priority = EventPriority.NORMAL)
     public void rewardEvent (AsyncMobRewardEvent event) throws NotRegisteredException {
         Location loc = event.getEntity().getLocation();
-        if (TownyTNEMobsControl.disabledWorlds.contains(loc.getWorld().getName()))
+        if (TownyTNE.disabledWorlds.contains(loc.getWorld().getName()))
             return;
 
         if (!TownyAPI.getInstance().isWilderness(loc)) {
             Town town = TownyAPI.getInstance().getTownBlock(loc).getTown();
-            if (TownyTNEMobsControl.exemptedTowns.contains(town.getName()))
+            if (TownyTNE.exemptedTowns.contains(town.getName()))
                 return;
-            if (TownyTNEMobsControl.insideTownMultiplier == 0.0)
+            if (TownyTNE.insideTownMultiplier == 0.0)
                 event.setCancelled(true);
             else {
                 int decimals = TNE.manager().currencyManager().get(loc.getWorld().getName(), event.getCurrency()).getDecimalPlaces();
-                BigDecimal reward = new BigDecimal(TownyTNEMobsControl.insideTownMultiplier).multiply(event.getReward()).setScale(decimals, BigDecimal.ROUND_HALF_DOWN);                
+                BigDecimal reward = new BigDecimal(TownyTNE.insideTownMultiplier).multiply(event.getReward()).setScale(decimals, BigDecimal.ROUND_HALF_DOWN);                
                 event.setReward(reward);
             }
         }

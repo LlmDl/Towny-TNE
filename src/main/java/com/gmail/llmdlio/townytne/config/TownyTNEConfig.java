@@ -1,4 +1,4 @@
-package com.gmail.llmdlio.townytnemobscontrol.config;
+package com.gmail.llmdlio.townytne.config;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -7,16 +7,16 @@ import java.util.ArrayList;
 
 import org.bukkit.configuration.InvalidConfigurationException;
 
-import com.gmail.llmdlio.townytnemobscontrol.TownyTNEMobsControl;
-import com.gmail.llmdlio.townytnemobscontrol.config.CommentedYamlConfig;
+import com.gmail.llmdlio.townytne.TownyTNE;
+import com.gmail.llmdlio.townytne.config.CommentedYamlConfig;
 
-public class TownyTNEMobsControlConfig {
+public class TownyTNEConfig {
 
-    private TownyTNEMobsControl plugin;
+    private TownyTNE plugin;
     private CommentedYamlConfig config;
     private String newline = System.getProperty("line.separator");
     
-    public TownyTNEMobsControlConfig(TownyTNEMobsControl plugin){
+    public TownyTNEConfig(TownyTNE plugin){
         this.plugin = plugin;
     }
 
