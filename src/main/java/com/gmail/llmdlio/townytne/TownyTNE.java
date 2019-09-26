@@ -17,10 +17,13 @@ public class TownyTNE extends JavaPlugin {
     private TownyTNEConfig config = new TownyTNEConfig(this);
     public final RewardsListener rewardsListener = new RewardsListener(this);
     public final CurrencyNoteListener currencyNoteListener = new CurrencyNoteListener(this);
+    public final ShopListener shopListener = new ShopListener(this);
     public static List<String> disabledWorlds;
     public static List<String> exemptedTowns;
     public static double insideTownMultiplier;
     public static boolean denyNoteUseOutsideBankPlots;
+    public static boolean enforceShopPlots;
+    public static boolean requireShopPlotOwnership;
     public static TNE tne;
 
     @Override
@@ -30,15 +33,17 @@ public class TownyTNE extends JavaPlugin {
         reloadConfig();
         if (!loadSettings())
             onDisable();
-        getLogger().info("Towny-TNE has enabled successfully!");
+        else {
+            killListeners();
+            registerListeners();
+            constructStartupMessage(); 
+            getLogger().info("Towny-TNE has enabled successfully!");
+        }
     }
 
     @Override
     public void onDisable() {
-        if (!HandlerList.getRegisteredListeners(this).isEmpty()) {
-            HandlerList.unregisterAll(rewardsListener);
-            HandlerList.unregisterAll(currencyNoteListener);
-        }
+        killListeners();
         getServer().getPluginManager().disablePlugin(Bukkit.getPluginManager().getPlugin("Towny-TNE"));
         
     }
@@ -49,7 +54,7 @@ public class TownyTNE extends JavaPlugin {
         if (TNE.loader().hasModuleEvent("AsyncMobRewardEvent"))
             return true;
         else {
-            getLogger().severe("TNE Version insufficient, go download TNE 0.1.1.8M4 or newer.");
+            getLogger().severe("TNE Version insufficient, go download TNE 0.1.1.9 or newer.");
             return false;
         }
     }
@@ -60,20 +65,31 @@ public class TownyTNE extends JavaPlugin {
             exemptedTowns = config.getConfig().getStringList("Exempted_Towns");
             insideTownMultiplier = config.getConfig().getDouble("Inside_Town_Multiplier");
             denyNoteUseOutsideBankPlots = config.getConfig().getBoolean("Deny_Currency_Note_Claiming_Outside_Bank_Plots");
-            if (!HandlerList.getRegisteredListeners(this).isEmpty()) {
-                HandlerList.unregisterAll(rewardsListener);
-                HandlerList.unregisterAll(currencyNoteListener);
-            }
-            if (insideTownMultiplier != 1.0)
-                getServer().getPluginManager().registerEvents(rewardsListener, this);
-            if (denyNoteUseOutsideBankPlots)
-                getServer().getPluginManager().registerEvents(currencyNoteListener, this);
-            constructStartupMessage();            
+            enforceShopPlots = config.getConfig().getBoolean("Enforce_Shop_Plots");
+            requireShopPlotOwnership = config.getConfig().getBoolean("Require_Shop_Plot_Ownershop");
+      
             return true;
         } catch (Exception e) {
             getLogger().severe("Failed to load settings from config.yml! Disabling Towny-TNE.");
             return false;
         }
+    }
+    
+    private void killListeners() {
+        if (!HandlerList.getRegisteredListeners(this).isEmpty()) {
+            HandlerList.unregisterAll(rewardsListener);
+            HandlerList.unregisterAll(currencyNoteListener);
+            HandlerList.unregisterAll(shopListener);
+        }
+    }
+    
+    private void registerListeners() { 
+        if (insideTownMultiplier != 1.0)
+            getServer().getPluginManager().registerEvents(rewardsListener, this);
+        if (denyNoteUseOutsideBankPlots)
+            getServer().getPluginManager().registerEvents(currencyNoteListener, this);
+        if (enforceShopPlots)
+            getServer().getPluginManager().registerEvents(shopListener, this);
     }
 
     private void constructStartupMessage() {
@@ -87,7 +103,11 @@ public class TownyTNE extends JavaPlugin {
                 message += "The following towns are exempt from the penalties against money rewards: " + exemptedTowns.toString().replace("[", "").replace("]", "") + ". ";
             message += "The multiplier against currency drops in non-exempted towns is set to " + insideTownMultiplier + ". ";
         }
-        message += "Currency notes are " + (denyNoteUseOutsideBankPlots ? "" : "not ") + "restricted to Towny bank plots."; 
+        message += "Currency notes are " + (denyNoteUseOutsideBankPlots ? "" : "not ") + "restricted to Towny bank plots. "; 
+        message += "Shops are " + (enforceShopPlots ? "" : "not ") + "restricted to Towny shop plots. ";
+        if (enforceShopPlots)
+            message += (requireShopPlotOwnership ? "Players must own the shop plots personally to create a shop. " : "Players must be able to build in the shop plot to create a shop. ");
+        
         String split = WordUtils.wrap(message, 44, System.lineSeparator(), true); 
         for (String line : split.split(System.lineSeparator()))
             System.out.println("* " + line.trim());
