@@ -1,9 +1,9 @@
-v1.0:
-  - First version.
-  - Plugin can prevent currency notes from being used outside of bank plots.
-  - Plugin can lessen/penalize note values based on whether entity killed was in town or wilderness.
-    - There is a list of towns that will not be penalized.
-  - There is a list of worlds which this plugin will ignore.
+v1.0:  
+  - Initial version.
+  - Currency notes can be limited to Bank plots.
+  - Currency drops can be altered inside towns, while exempting a list of towns.
+  - Currency notes and drops manipulation can be disabled in a list of worlds.
 v1.1:
-  - Plugin can prevent shops being made outside of shop plots.
-  - Worlds that have towny disabled are automatically included in the disabled worlds list.
+  - Item Sign shop creation can be limited to just Shop plots.
+    - Optionally it can be a personally owned shop plot, or any shop plot where the creator can build.
+  - Made disabledWorlds tests also ignore worlds where usingTowny is false.
