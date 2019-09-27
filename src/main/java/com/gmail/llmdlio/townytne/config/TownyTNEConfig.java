@@ -48,20 +48,20 @@ public class TownyTNEConfig {
             e.printStackTrace(); 
         }
 
-        addComment("Version","  # Towny-TNEMobs-Bridge by LlmDl."); 
-
-        addDefault("Version", plugin.getDescription().getVersion()); 
+        addComment("Version","  # Towny-TNEMobs-Bridge by LlmDl.");
+        addDefault("Version", ""); 
 
         addComment("Disabled_Worlds", newline, 
-                "  # A list of worlds where players are not penalized for killing things with lesser money drops.",
-                "  # Disabled Worlds:",
+                "  # A list of worlds which will not be affected by this plugin.",
+                "  # Any world in which Towny has usingTowny=false will already be disabled automatically.",
+                "  # Disabled_Worlds:",
                 "  # - world",
                 "  # - world_nether");
         addDefault("Disabled_Worlds", new ArrayList<String>());
 
         addComment("Exempted_Towns", newline, 
                 "  # A list of towns in which players are not penalized for killing things with lesser money drops.",
-                "  # Exempted Towns:",
+                "  # Exempted_Towns:",
                 "  # - SpawnTown",
                 "  # - Best_Town_on_Dah_Server");
         addDefault("Exempted_Towns", new ArrayList<String>());
@@ -76,6 +76,16 @@ public class TownyTNEConfig {
         addComment("Deny_Currency_Note_Claiming_Outside_Bank_Plots", newline,
                 "  # When set to true TNE Currency Notes will only be usable while inside Towny Bank plots.");
         addDefault("Deny_Currency_Note_Claiming_Outside_Bank_Plots", false);
+        
+        addComment("Enforce_Shop_Plots", newline, 
+                "  # Restrict TNE shops to Towny shop plots.");
+        addDefault("Enforce_Shop_Plots", false);
+        
+        addComment("Require_Shop_Plot_Ownership", newline,
+                "  # When Enforce_Shop_Plots is true, do we require the shop-maker to personally own the Towny shop plot.",
+                "  # If true, they must own it. If false, they must be able to build at the shop location.",
+                "  # Set to false if you want to have shared/group shop plots.");
+        addDefault("Require_Shop_Plot_Ownership", true);
 
         // Write back config 
         try { 
@@ -98,7 +108,9 @@ public class TownyTNEConfig {
     }
 
     private void addDefault(String path, Object defaultValue) {
-        if (!hasPath(path))
+    	if (path.equals("Version"))
+    		config.set(path, plugin.getDescription().getVersion());
+    	else if (!hasPath(path))
             config.set(path, defaultValue);
     }
 }

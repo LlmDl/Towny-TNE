@@ -4,7 +4,7 @@ version: ${project.version}
 api-version: ${project.bukkitAPIVersion}
 author: LlmDl
 depend: [Towny,TheNewEconomy]
-description: Bridge plugin to make Towny locations affect TNEMob payouts
+description: A plugin that provides Towny-location awareness to TheNewEconomy.
 prefix: Towny-TNE
 commands:
   towny-tne:

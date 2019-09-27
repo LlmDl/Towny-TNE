@@ -1,11 +1,13 @@
 package com.gmail.llmdlio.townytne;
 
+import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 
 import com.palmergames.bukkit.towny.TownyAPI;
+import com.palmergames.bukkit.towny.exceptions.NotRegisteredException;
 import com.palmergames.bukkit.towny.object.TownBlock;
 import com.palmergames.bukkit.towny.object.TownBlockType;
 
@@ -21,23 +23,22 @@ public class CurrencyNoteListener implements Listener{
     }
 
     @EventHandler (priority = EventPriority.NORMAL)
-    public void cashedNoteEvent (TNECurrencyNoteClaimedEvent event) {
+    public void cashedNoteEvent (TNECurrencyNoteClaimedEvent event) throws NotRegisteredException {
         Location loc = event.getPlayer().getLocation();
-        if (TownyTNE.disabledWorlds.contains(loc.getWorld().getName()))
+        if (TownyTNE.disabledWorlds.contains(loc.getWorld().getName()) || !TownyAPI.getInstance().getDataSource().getWorld(loc.getWorld().getName()).isUsingTowny())
             return;
 
         if (TownyAPI.getInstance().isWilderness(loc)) {
-            event.getPlayer().sendMessage("You cannot deposit your currency note outside of a town's Bank plot.");
+        	event.getPlayer().sendMessage(ChatColor.DARK_RED + "You cannot deposit your currency note outside of a town's Bank plot.");
             event.setCancelled(true);
             return;
-        } else {
+    	} else {
             TownBlock townBlock = TownyAPI.getInstance().getTownBlock(loc);
             if (!townBlock.getType().equals(TownBlockType.BANK)) {
-                event.getPlayer().sendMessage("You cannot deposit your currency note outside of a town's Bank plot.");
-                event.setCancelled(true);
-                return;
-            } else
-                return;
+            	event.getPlayer().sendMessage(ChatColor.DARK_RED + "You cannot deposit your currency note outside of a town's Bank plot.");
+            	event.setCancelled(true);
+            	return;
+            }
         }
     }
 }
