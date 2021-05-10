@@ -7,9 +7,11 @@ import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.event.HandlerList;
+import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import com.gmail.llmdlio.townytne.config.TownyTNEConfig;
+import com.palmergames.bukkit.util.Version;
 
 import net.tnemc.core.TNE;
 
@@ -26,9 +28,18 @@ public class TownyTNE extends JavaPlugin {
     public static boolean requireShopPlotOwnership;
     public static TNE tne;
 
+    private static Version requiredTownyVersion = Version.fromString("0.97.0.0"); 
+    
     @Override
     public void onEnable() {
-        if (!checkTNEVersion())
+    	Plugin towny = getServer().getPluginManager().getPlugin("Towny");
+		if (!townyVersionCheck(towny.getDescription().getVersion())) {
+			getLogger().severe("Towny version does not meet required version: " + requiredTownyVersion.toString());
+			onDisable();
+		} else
+			getLogger().info("Towny version " + towny.getDescription().getVersion() + " found.");
+
+    	if (!checkTNEVersion())
             onDisable();
         reloadConfig();
         if (!loadSettings())
@@ -46,6 +57,12 @@ public class TownyTNE extends JavaPlugin {
         killListeners();
         getServer().getPluginManager().disablePlugin(Bukkit.getPluginManager().getPlugin("Towny-TNE"));
         
+    }
+	
+    private boolean townyVersionCheck(String version) {
+		Version ver = Version.fromString(version);
+		
+		return ver.compareTo(requiredTownyVersion) >= 0;
     }
 
     private boolean checkTNEVersion() {

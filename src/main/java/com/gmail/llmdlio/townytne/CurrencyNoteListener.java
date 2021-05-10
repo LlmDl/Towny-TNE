@@ -7,7 +7,6 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 
 import com.palmergames.bukkit.towny.TownyAPI;
-import com.palmergames.bukkit.towny.exceptions.NotRegisteredException;
 import com.palmergames.bukkit.towny.object.TownBlock;
 import com.palmergames.bukkit.towny.object.TownBlockType;
 
@@ -23,9 +22,9 @@ public class CurrencyNoteListener implements Listener{
     }
 
     @EventHandler (priority = EventPriority.NORMAL)
-    public void cashedNoteEvent (TNECurrencyNoteClaimedEvent event) throws NotRegisteredException {
+    public void cashedNoteEvent (TNECurrencyNoteClaimedEvent event) {
         Location loc = event.getPlayer().getLocation();
-        if (TownyTNE.disabledWorlds.contains(loc.getWorld().getName()) || !TownyAPI.getInstance().getDataSource().getWorld(loc.getWorld().getName()).isUsingTowny())
+        if (TownyTNE.disabledWorlds.contains(loc.getWorld().getName()) || !TownyAPI.getInstance().isTownyWorld(loc.getWorld()))
             return;
 
         if (TownyAPI.getInstance().isWilderness(loc)) {

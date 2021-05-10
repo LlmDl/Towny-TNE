@@ -11,7 +11,6 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 
 import com.palmergames.bukkit.towny.TownyAPI;
-import com.palmergames.bukkit.towny.exceptions.NotRegisteredException;
 import com.palmergames.bukkit.towny.utils.ShopPlotUtil;
 
 import net.tnemc.core.event.module.TNEModuleDataEvent;
@@ -26,14 +25,14 @@ public class ShopListener implements Listener{
     }
 
     @EventHandler (priority = EventPriority.NORMAL)
-    public void onShopCreate (TNEModuleDataEvent event) throws NotRegisteredException {
+    public void onShopCreate (TNEModuleDataEvent event) {
 
     	if (!event.getEventName().equals("SignCreate"))
     		return;
     	if (!event.getData().get("type").equals("item"))
     		return;
         Location loc = (Location) event.getData().get("location");
-        if (TownyTNE.disabledWorlds.contains(loc.getWorld().getName()) || !TownyAPI.getInstance().getDataSource().getWorld(loc.getWorld().getName()).isUsingTowny())
+        if (TownyTNE.disabledWorlds.contains(loc.getWorld().getName()) || !TownyAPI.getInstance().isTownyWorld(loc.getWorld()))
         	return;
         Player player = Bukkit.getPlayer((UUID) event.getData().get("creator"));
         boolean allowedShopCreation = false;
